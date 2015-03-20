@@ -1,0 +1,9 @@
+{
+  "webPort": 1030,
+
+  "mongodbUrl": "mongodb://localhost/phobicpush",
+
+  "gcm": {
+    "apiKey": "AIzaSyCalDkSh5ozIZ9-ifQyKvUS6gccrFbHi_Q"
+  }
+}
