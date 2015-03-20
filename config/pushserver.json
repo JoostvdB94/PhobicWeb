@@ -1,5 +1,5 @@
 {
-  "webPort": 1030,
+  "webPort": 10030,
 
   "mongodbUrl": "mongodb://localhost/phobicpush",
 
