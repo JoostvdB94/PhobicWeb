@@ -14,11 +14,11 @@ var api = require('./routes/api');
 var app = express();
 var http = require('http').Server(app);
 
-http.listen(process.env.PORT, function() {
+http.listen(process.env.PORT || 8080, function() {
     console.log('listening on: ' + process.env.PORT);
 });
 
-/*Starten van NodeJS Pushserver (LATEN STAAN)*/
+/*Starten van NodeJS Pushserver (LATEN STAAN)*/ 
 var spawn = require('child_process').spawn;
 var prc = spawn('node',  ['./node_modules/node-pushserver/bin/pushserver.js','-c','./config/pushserver.json']);
 /*Eind starten NodeJS Pushserver*/
@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api',api);
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -49,25 +50,25 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+//if (app.get('env') === 'development') {
+//    app.use(function(err, req, res, next) {
+//        res.status(err.status || 500);
+//        res.render('error', {
+//            message: err.message,
+//            error: err
+//        });
+//    });
+//}
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+//app.use(function(err, req, res, next) {
+//    res.status(err.status || 500);
+//    res.render('error', {
+//        message: err.message,
+//        error: {}
+//    });
+//});
 
 
 /*Code om Pushserver te stoppen als deze NodeJS instance wordt gestopt (LATEN STAAN)*/
