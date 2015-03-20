@@ -4,12 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+pushserver = require('node-pushserver');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var update = require('./routes/update');
 
 var app = express();
+
+/*Starten van NodeJS Pushserver (LATEN STAAN)*/
+var spawn = require('child_process').spawn;
+var prc = spawn('node',  ['./node_modules/node-pushserver/bin/pushserver.js','-c','./config/pushserver.json']);
+/*Eind starten NodeJS Pushserver*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,5 +64,21 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+/*Code om Pushserver te stoppen als deze NodeJS instance wordt gestopt (LATEN STAAN)*/
+prc.stdout.on('data', function(data) {
+    console.log(data.toString());
+});
+
+prc.on('close', function (code) {
+    sys.puts('process exit code ' + code);
+    prc.kill('SIGTERM');
+});
+
+prc.on('exit', function(code) {
+    sys.puts('About to exit with code:', code);
+    prc.kill('SIGTERM');
+});
+/*  Eind stoppen pushserver */
 
 module.exports = app;
