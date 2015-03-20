@@ -10,6 +10,11 @@ var users = require('./routes/users');
 var update = require('./routes/update');
 
 var app = express();
+var http = require('http').Server(app);
+
+http.listen(process.env.PORT, function() {
+    console.log('listening on: ' + process.env.PORT);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
