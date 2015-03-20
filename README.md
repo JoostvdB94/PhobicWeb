@@ -1,2 +1,0 @@
-# PhobicWeb
-ServerSide app
