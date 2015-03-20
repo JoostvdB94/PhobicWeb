@@ -10,6 +10,7 @@ pushserver = require('node-pushserver');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var update = require('./routes/update');
+var data = require('./routes/data');
 
 var app = express();
 var http = require('http').Server(app);
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/update', update);
+app.use('/data',data);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
