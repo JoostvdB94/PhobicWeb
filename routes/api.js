@@ -698,9 +698,11 @@ router.delete("/phobia/:id", function (req, res, next) {
                     "phobia with id " + req.params.id + " not found"
                 ]});
         } 
+        if(phobia != null) {
 	    phobia.remove( function ( err, phobia ){
 	      res.json(phobia);
 	    });
+    }
   });
 });
 //////////////////////////////////////endphobia/////////////////////////////////////////////////
@@ -778,9 +780,11 @@ router.delete("/phobia/:id/relaxationmethod/:relaxid", function (req, res, next)
                     "relaxationmethod with id " + req.params.id + " not found"
                 ]});
         } 
+        if(relaxationmethod != null) {
 	    relaxationmethod.remove( function ( err, relaxationmethod ){
 	      res.json(relaxationmethod);
 	    });
+    }
   });
 });
 //////////////////////////////////////endrelaxationmethod///////////////////////////////////////
