@@ -18,7 +18,7 @@ http.listen(process.env.PORT || 8080, function() {
     console.log('listening on: ' + process.env.PORT);
 });
 
-/*Starten van NodeJS Pushserver (LATEN STAAN)*/ 
+/*Starten van NodeJS Pushserver (LATEN STAAN)*/
 var spawn = require('child_process').spawn;
 var prc = spawn('node',  ['./node_modules/node-pushserver/bin/pushserver.js','-c','./config/pushserver.json']);
 /*Eind starten NodeJS Pushserver*/
