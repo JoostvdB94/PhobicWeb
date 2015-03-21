@@ -10,7 +10,7 @@ var Relaxationmethod = mongoose.model('relaxationmethod');
 router.get("/phobia", function (req, res, next) {
       Phobia.find( function ( err, phobia, count ){
     	res.json(phobia);
-  }).populate('relaxationmethods');
+  });
 });
 
 
