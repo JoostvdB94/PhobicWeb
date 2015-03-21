@@ -14,7 +14,6 @@ router.get("/phobia", function (req, res, next) {
 });
 
 
-});
 router.get('/data', function(req, res, next) {
         res.status(200).set('Content-Type', 'application/json');
         res.json([{
