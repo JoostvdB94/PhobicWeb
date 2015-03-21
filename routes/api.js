@@ -669,21 +669,35 @@ router.post("/phobia", function (req, res, next) {
 	new Phobia({
 	    name    : req.body.name
 	  }).save( function( err, phobia, count ){
+        rest.statusCode = 201;
 	     res.json(phobia);
 	  });
 });
 
 router.put("/phobia/:id", function (req, res, next) {
     Phobia.findById( req.params.id, function ( err, phobia ){
+        if(err) {
+            res.statusCode = 404;
+            res.json({"errors" : [
+                    "phobia with id " + req.params.id + " not found"
+                ]});
+        } 
 	    phobia.name    = req.body.name;
 	    phobia.save( function ( err, phobia, count ){
 	        res.json(phobia);
 	    });
+    
 	});
 });
 
 router.delete("/phobia/:id", function (req, res, next) {
       Phobia.findById( req.params.id, function ( err, phobia ){
+        if(err) {
+            res.statusCode = 404;
+            res.json({"errors" : [
+                    "phobia with id " + req.params.id + " not found"
+                ]});
+        } 
 	    phobia.remove( function ( err, phobia ){
 	      res.json(phobia);
 	    });
@@ -708,11 +722,17 @@ router.post("/phobia/:id/relaxationmethod", function (req, res, next) {
 	  });
 
 	  relax.save( function( err, phobia, count ){
-	  	console.log(err);
+
 	     res.json(phobia);
 	  });
 
 	  Phobia.findById( req.params.id, function ( err, phobia ){
+        if(err) {
+            res.statusCode = 404;
+            res.json({"errors" : [
+                    "phobia with id " + req.params.id + " not found"
+                ]});
+        } 
 	    phobia.relaxationmethods.push(relax);
 	    phobia.save( function ( err, phobia, count ){
 	    });
@@ -721,12 +741,24 @@ router.post("/phobia/:id/relaxationmethod", function (req, res, next) {
 
 router.get("/phobia/:id/relaxationmethod/:relaxid", function (req, res, next) {
       Relaxationmethod.findById( req.params.relaxid, function ( err, relaxationmethod ){
+        if(err) {
+            res.statusCode = 404;
+            res.json({"errors" : [
+                    "relaxationmethod with id " + req.params.id + " not found"
+                ]});
+        } 
     	res.json(relaxationmethod);
   	});
 });
 
 router.put("/phobia/:id/relaxationmethod/:relaxid", function (req, res, next) {
       Relaxationmethod.findById( req.params.relaxid, function ( err, relaxationmethod ){
+        if(err) {
+            res.statusCode = 404;
+            res.json({"errors" : [
+                    "relaxationmethod with id " + req.params.id + " not found"
+                ]});
+        } 
 	    relaxationmethod.name    		= req.body.name;
 	    relaxationmethod.activities 		= req.body.activities;
 	    relaxationmethod.phobia 			= req.params.id;
@@ -740,6 +772,12 @@ router.put("/phobia/:id/relaxationmethod/:relaxid", function (req, res, next) {
 
 router.delete("/phobia/:id/relaxationmethod/:relaxid", function (req, res, next) {
       Relaxationmethod.findById( req.params.relaxid, function ( err, relaxationmethod ){
+        if(err) {
+            res.statusCode = 404;
+            res.json({"errors" : [
+                    "relaxationmethod with id " + req.params.id + " not found"
+                ]});
+        } 
 	    relaxationmethod.remove( function ( err, relaxationmethod ){
 	      res.json(relaxationmethod);
 	    });
