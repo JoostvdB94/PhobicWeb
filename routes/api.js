@@ -707,7 +707,7 @@ router.delete("/phobia/:id", function (req, res, next) {
 
 //////////////////////////////////////relaxationmethod//////////////////////////////////////////
 router.get("/phobia/:id/relaxationmethod", function (req, res, next) {
-      Relaxationmethod.find({ _id: req.params.id }, function ( err, relaxationmethod, count ){
+    Relaxationmethod.find({ phobia: req.params.id }, function ( err, relaxationmethod, count ){
     	res.json(relaxationmethod);
   });
 });
