@@ -10,7 +10,7 @@ var requestTokenSecrets = {};
 var request = require('request');
 
 router.get("/", function (req, res, next) {
-    var dataUrl = req.protocol + '://' + req.get('host')+"/api/data";
+    var dataUrl = req.protocol + '://' + req.get('host').replace('jxcore_target_','')+"/api/data";
     console.log(dataUrl);
     var total = 0;
     var count = 0;
