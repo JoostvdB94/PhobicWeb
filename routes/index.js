@@ -11,7 +11,7 @@ var request = require('request');
 
 router.get("/", function (req, res, next) {
     var dataUrl = req.protocol + '://' + req.get('host')+"/api/data";
-
+    console.log(dataUrl);
     var total = 0;
     var count = 0;
     var min = 500;
@@ -41,7 +41,6 @@ router.get("/", function (req, res, next) {
         //res.end();
         if(attack){
             var pushUrl = req.protocol + '://compuplex.nl:10030/send';
-            console.log(pushUrl);
             request(
                 {
                     method:'POST',
