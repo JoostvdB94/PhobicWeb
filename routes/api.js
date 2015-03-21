@@ -6,13 +6,6 @@ var mongoose = require('mongoose');
 var Phobia = mongoose.model('phobia');
 var Relaxationmethod = mongoose.model('relaxationmethod');
 
-////////////////////////////////////phobia/////////////////////////////////////////////////////
-router.get("/phobia", function (req, res, next) {
-      Phobia.find( function ( err, phobia, count ){
-    	res.json(phobia);
-  });
-});
-
 
 router.get('/data', function(req, res, next) {
         res.status(200).set('Content-Type', 'application/json');
@@ -659,6 +652,13 @@ router.get('/data', function(req, res, next) {
         ]);
 });
 
+////////////////////////////////////phobia/////////////////////////////////////////////////////
+router.get("/phobia", function (req, res, next) {
+      Phobia.find( function ( err, phobia, count ){
+        res.json(phobia);
+  });
+});
+
 router.get("/phobia/:id", function (req, res, next) {
     Phobia.findById( req.params.id, function ( err, phobia ){
     	res.json(phobia);
@@ -669,7 +669,7 @@ router.post("/phobia", function (req, res, next) {
 	new Phobia({
 	    name    : req.body.name
 	  }).save( function( err, phobia, count ){
-        rest.statusCode = 201;
+        res.statusCode = 201;
 	     res.json(phobia);
 	  });
 });
@@ -707,9 +707,9 @@ router.delete("/phobia/:id", function (req, res, next) {
 
 //////////////////////////////////////relaxationmethod//////////////////////////////////////////
 router.get("/phobia/:id/relaxationmethod", function (req, res, next) {
-      Relaxationmethod.find( function ( err, relaxationmethod, count ){
+      Relaxationmethod.find({ _id: req.params.id }, function ( err, relaxationmethod, count ){
     	res.json(relaxationmethod);
-  }).populate('relaxationmethod');
+  });
 });
 
 router.post("/phobia/:id/relaxationmethod", function (req, res, next) {
